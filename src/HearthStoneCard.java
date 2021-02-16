@@ -1,10 +1,10 @@
 
 public class HearthStoneCard
 {
-	int cost;
-	int attack;
-	int defense;
-	String name;
+	private int cost;
+	private int attack;
+	private int defense;
+	private String name;
 	
 	public HearthStoneCard(String name, int cost, int attack, int defense)
 	{
@@ -13,10 +13,19 @@ public class HearthStoneCard
 		this.defense = defense;
 		this.name = name;
 	}
+	
+	//setters allow us to conditionally change the value of a private member
+	public void setName(String name)
+	{
+		if(name.length() >= 5)
+		{
+			this.name = name;
+		}
+	}
+	
 	void display()
 	{
-		System.out.println( "Name: " + this.name + "\nCost: " + this.cost + "\n Attack:" + this.attack + "\nDefense: " + this.defense);
-		System.out.format("Name: %s\n Cost: %d \nAttack: %d\n Defense: %d\n", this.name, this.cost, this.attack, this.defense);
+		//System.out.println("Name: " + this.name + "\nCost" + this.cost + "\nAttack: " + this.attack + " Defense: " + this.defense);
+		System.out.format("Name: %s \nCost: %d \nAttack: %d Defense: %d\n", this.name, this.cost, this.attack,this.defense);
 	}
-
 }
