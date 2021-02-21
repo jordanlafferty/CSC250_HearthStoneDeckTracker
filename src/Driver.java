@@ -35,9 +35,9 @@ public class Driver
 		    			int attack = Integer.parseInt(attackS);
 		    			String healthS = String.valueOf(cardData.get("health"));
 		    			int health = Integer.parseInt(healthS);
-		    			count ++;
 		    			theMinions[i] = new HearthStoneCard(name, cost, attack, health);
 		    			theMinions[i].display();
+		    			count ++;
 		    		
 
 		    		}
