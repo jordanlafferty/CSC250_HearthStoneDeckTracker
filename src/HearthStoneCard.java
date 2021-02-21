@@ -1,10 +1,10 @@
 
 public class HearthStoneCard
 {
-	private int cost;
-	private int attack;
-	private int defense;
-	private String name;
+	 int cost;
+	 int attack;
+	int defense;
+	String name;
 	
 	public HearthStoneCard(String name, int cost, int attack, int defense)
 	{

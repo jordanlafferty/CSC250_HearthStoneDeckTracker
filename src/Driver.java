@@ -1,61 +1,51 @@
 import java.net.URL;
+import org.json.simple.JSONValue;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import java.util.Scanner;
 
- public class Driver 
- {
+public class Driver 
+{
 
- 	public static void main(String[] args)
- 	{ 
- 		HearthStoneCard c1 = new HearthStoneCard("Armor Vendor", 1, 1, 3);
- 		HearthStoneCard c2 = new HearthStoneCard("Wandmaker", 2, 2, 2);
- 		c1.display();
- 		c2.display();
+	public static void main(String[] args)
+	{ 
+		URLReader hearthstoneURLReader = new URLReader("https://api.hearthstonejson.com/v1/25770/enUS/cards.json");
+		//System.out.println(hearthstoneURLReader.getTheURLContents());
+		Object obj = JSONValue.parse(hearthstoneURLReader.getTheURLContents());
+		HearthStoneCard[] theMinions = new HearthStoneCard[8000];
+		
+	    //System.out.println(obj instanceof JSONArray);
+	    if(obj instanceof JSONArray)
+	    {
+	    	//I am only in here if obj IS a JSONArray
+	    	JSONArray array = (JSONArray)obj;
+	    	int count = 0;
+	    	
+		    for(int i = 0; i < array.size(); i++)
+		    {
+		    	JSONObject cardData = (JSONObject)array.get(i);
+		    	if(cardData.containsKey("cost") && cardData.containsKey("name"))
+		    	{
+		    		if(cardData.containsKey("type") && cardData.get("type").equals("MINION"))
+		    		{
+		    			String name = String.valueOf(cardData.get("name"));
+		    			String costS = String.valueOf(cardData.get("cost"));
+		    			int cost = Integer.parseInt(costS);
+		    			String attackS = String.valueOf(cardData.get("attack"));
+		    			int attack = Integer.parseInt(attackS);
+		    			String healthS = String.valueOf(cardData.get("health"));
+		    			int health = Integer.parseInt(healthS);
+		    			count ++;
+		    			theMinions[i] = new HearthStoneCard(name, cost, attack, health);
+		    			theMinions[i].display();
+		    		
 
- 		c1.setName("woot");
- 		c1.display();
-
-
- 		String cardJson = Driver.getJSON("https://api.hearthstonejson.com/v1/25770/enUS/cards.json");
- 		System.out.println(cardJson);
- 		//Let's make a json parser
-
- 		//name = input("Enter your name:")
- 		//Scanner input = new Scanner(System.in);
- 		//System.out.print("Enter your age:");
- 		//String age = input.nextLine(); //reads the next String from the keyboard in this case
- 		//System.out.println(Integer.parseInt(age) + 2);
- 		//int age = input.nextInt();
- 		//System.out.println(age + 2);
-
- 	}
-
- 	//open a URL and read its contents as a String
- 	static String getJSON(String urlString)
- 	{	    
- 		String line = "";
- 		try
- 		{
- 			URL url = new URL(urlString);
- 		    Scanner input = new Scanner(url.openStream());
- 		    // open the url stream, wrap it an a few "readers"
- 		    //BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-
- 		    //keep reading from the scanner as long as their is something to read
- 		    while (input.hasNext())
- 		    {
- 		    	line += input.nextLine();
- 		    }
-
- 		    // close our reader
- 		    input.close();
-
- 		    //reader.close();
- 		}
- 	    catch(Exception e)
- 		{
- 	    	e.printStackTrace();
- 	    	line = "Can't Connect";
- 		}
- 		return line;
- 	}
- }
+		    		}
+		    		
+		    	}
+		    	
+		    }
+		    System.out.println(count);
+	    }
+	}
+}
