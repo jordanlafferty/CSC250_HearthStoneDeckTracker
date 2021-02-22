@@ -1,10 +1,11 @@
 
 public class HearthStoneCard
 {
+	String name;
 	 int cost;
 	 int attack;
 	int defense;
-	String name;
+
 	
 	public HearthStoneCard(String name, int cost, int attack, int defense)
 	{
@@ -22,6 +23,11 @@ public class HearthStoneCard
 			this.name = name;
 		}
 	}
+	
+	public int getCost()
+ 	{
+ 		return this.cost;
+ 	}
 	
 	void display()
 	{
