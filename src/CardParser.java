@@ -73,7 +73,6 @@ import org.json.simple.JSONArray;
  	 				this.theMinions.remove(j);
  	 				
  	 		     }
-
  			}
  			x++;
  	    }
