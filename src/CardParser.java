@@ -55,9 +55,46 @@ import org.json.simple.JSONArray;
  		}
  	}
 
+ 	public void insertionSortLowestToHighestCost()
+ 	{
+ 		for(int currStart = 1; currStart < this.theMinions.size(); currStart++)
+ 		{
+ 			//try to move the value at currStart as far up the array as possible
+ 			// then move on to next currStart 
+ 			int currIndex = currStart;
+ 			HearthStoneCard temp;
+ 			while(currIndex > 0 && this.theMinions.get(currIndex).getCost() < 
+ 					this.theMinions.get(currIndex-1).getCost())
+ 			{
+ 				//we swap the 2 places
+ 				temp = this.theMinions.get(currIndex);
+ 				this.theMinions.set(currIndex, this.theMinions.get(currIndex-1));
+ 				this.theMinions.set(currIndex-1,  temp);
+ 				currIndex--;
+ 			}
+ 			
+ 			
+ 		}
+ 	}
+ 	
+ 	
  	public void sortLowestCostToHighestCost()
  	{
- 		Sorted = new ArrayList<HearthStoneCard>();
+ 		ArrayList<HearthStoneCard> theSortedList = new ArrayList<HearthStoneCard>();
+ 		HearthStoneCard nextSmallest;
+ 		while(this.theMinions.size()>0)
+ 		{
+ 			nextSmallest = this.findSmallest();
+ 			theSortedList.add(nextSmallest);
+ 		}
+ 		//this is making var theMinions point to the same place
+ 		// as theSortedList in Memory
+ 		
+ 		this.theMinions =theSortedList;
+ 		
+ 		// Other way to accomplish this 
+ 		
+ 		/*Sorted = new ArrayList<HearthStoneCard>();
  		int x = 0;
  		
  		for(int i = 0; i < this.theMinions.size(); i++)
@@ -82,8 +119,29 @@ import org.json.simple.JSONArray;
  		{
  			this.Sorted.get(i).display();
  		}
+	*/
 
-
+ 	}
+ 	
+ 	private HearthStoneCard findSmallest()
+ 	{
+ 		//go through Minions and add & remove cards
+ 		HearthStoneCard currWinner = this.theMinions.get(0);
+ 		int indexOfWinner = 0;
+ 		
+ 		for(int i = 0; i < this.theMinions.size(); i++)
+ 		{
+ 			if (this.theMinions.get(i).getCost()< currWinner.getCost())
+ 			{
+ 				currWinner = this.theMinions.get(i);
+ 				indexOfWinner = i;
+ 				
+ 			}
+ 		}
+ 		//the card with the smallest cost should be in currWinner
+ 		//the position of the card with the smallest cost should be in indexOfWinner
+ 		this.theMinions.remove(indexOfWinner);
+ 		return currWinner;
  	}
  	
  	
