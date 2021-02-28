@@ -57,6 +57,8 @@ import org.json.simple.JSONArray;
 
  	public void insertionSortLowestToHighestCost()
  	{
+ 		//this is a simpler way to sort
+ 		
  		for(int currStart = 1; currStart < this.theMinions.size(); currStart++)
  		{
  			//try to move the value at currStart as far up the array as possible
@@ -77,6 +79,31 @@ import org.json.simple.JSONArray;
  		}
  	}
  	
+ 	public void selectionSortLowestToHighestCost()
+ 	{
+ 		HearthStoneCard temp;
+ 		
+ 		for(int i = 0; i < this.theMinions.size()-1; i++)
+ 		{
+ 			int minIndex = i;
+ 			
+ 			for(int j = i+1; j < this.theMinions.size(); j++)
+ 			{
+ 				
+ 				if (this.theMinions.get(j).getCost() > this.theMinions.get(minIndex).getCost())
+ 				{
+ 					minIndex= j;
+ 						
+ 				}
+ 				
+	 			
+ 			}
+ 			temp = this.theMinions.get(minIndex);
+ 			this.theMinions.set(minIndex, this.theMinions.get(i));
+ 			this.theMinions.set(i,  temp);
+ 		}
+ 		
+ 	}
  	
  	public void sortLowestCostToHighestCost()
  	{
