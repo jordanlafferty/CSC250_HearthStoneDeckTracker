@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 import org.json.simple.JSONArray;
  import org.json.simple.JSONObject;
@@ -47,11 +48,149 @@ import org.json.simple.JSONArray;
  	    }
  	}
 
+ 
+ 	
+ 	
  	public void showMinions()
  	{
  		for(int i = 0; i < this.theMinions.size(); i++)
  		{
  			this.theMinions.get(i).display();
+ 		}
+ 	}
+
+ 	
+ 	
+ 	public void binarySearch()
+ 	{
+ 		Sorted = new ArrayList<HearthStoneCard>();
+ 		
+
+ 		
+ 		
+ 		sortAttack();
+ 		Scanner input = new Scanner(System.in);
+		System.out.println("Enter attack: ");
+		String num  = input.nextLine();
+		int attack = Integer.parseInt(num);
+		
+		
+		
+		
+		int size = this.theMinions.size()/2;
+		int attackCard = this.theMinions.get(size).getAttack();
+		
+		for (int i = 2; i < this.theMinions.size()+2; i++)
+		{
+			attackCard = this.theMinions.get(size).getAttack();
+			
+			if (attack == attackCard)
+			{
+				i = 2000;
+				Sorted.add(this.theMinions.get(size));
+				int attackf = this.theMinions.get(size+1).getAttack();
+				int attackb = this.theMinions.get(size-1).getAttack();
+				
+				// if there are more cards with the same attack forward
+				if (attack == attackf)
+				{	
+					
+					
+					for (int x = 0; x < 962; x++ )
+					{
+						
+						size ++;
+						int attackPlus = this.theMinions.get(size).getAttack();
+						if (attack == attackPlus)
+						{
+							Sorted.add(this.theMinions.get(size));
+							
+						}
+					}
+				}
+				
+				// if there are more cards with the same attack backward
+				if (attack == attackb)
+				{	
+					size = this.theMinions.size()/2;
+					
+					for (int x=0; x < 962; x++ )
+					{
+						
+						size --;
+						int attackMinus = this.theMinions.get(size).getAttack();
+						if (attack == attackMinus)
+						{
+							Sorted.add(this.theMinions.get(size));
+							
+						}
+					}
+				}
+				
+				
+			
+				
+			
+			}
+			
+			if (attack < attackCard)
+			{
+				
+				int intResult = (int) Math.pow(2, i);
+				int divide = this.theMinions.size()/intResult;
+				size = size + divide;
+				
+				
+				
+			}
+			
+			if (attack > attackCard)
+			{
+				int intResult = (int) Math.pow(2, i);
+				int divide = this.theMinions.size()/intResult;
+				size = size - divide;
+				
+				
+				
+			}
+			
+			
+			
+		}
+		
+		for(int i = 0; i < this.Sorted.size(); i++)
+ 		{
+ 			this.Sorted.get(i).display();
+ 		}
+ 		
+		
+		
+		
+
+ 	}
+ 	
+ 	public void sortAttack()
+ 	{
+ 		HearthStoneCard temp;
+ 		
+ 		for(int i = 0; i < this.theMinions.size()-1; i++)
+ 		{
+ 			int minIndex = i;
+ 			
+ 			for(int j = i+1; j < this.theMinions.size(); j++)
+ 			{
+ 				
+ 				if (this.theMinions.get(j).getAttack() > this.theMinions.get(minIndex).getAttack())
+ 				{
+ 					minIndex= j;
+ 						
+ 				}
+ 				
+	 			
+ 			}
+ 			temp = this.theMinions.get(minIndex);
+ 			this.theMinions.set(minIndex, this.theMinions.get(i));
+ 			this.theMinions.set(i, temp);
  		}
  	}
 
@@ -79,7 +218,7 @@ import org.json.simple.JSONArray;
  		}
  	}
  	
- 	public void selectionSortLowestToHighestCost()
+ 	public void selectionSortHighestToLowestCost()
  	{
  		HearthStoneCard temp;
  		
@@ -104,6 +243,10 @@ import org.json.simple.JSONArray;
  		}
  		
  	}
+ 	
+ 	
+ 	
+ 	
  	
  	public void sortLowestCostToHighestCost()
  	{
@@ -149,6 +292,8 @@ import org.json.simple.JSONArray;
 	*/
 
  	}
+ 	
+ 	
  	
  	private HearthStoneCard findSmallest()
  	{

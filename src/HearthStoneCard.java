@@ -29,6 +29,11 @@ public class HearthStoneCard
  		return this.cost;
  	}
 	
+	public int getAttack()
+ 	{
+ 		return this.attack;
+ 	}
+	
 	void display()
 	{
 		//System.out.println("Name: " + this.name + "\nCost" + this.cost + "\nAttack: " + this.attack + " Defense: " + this.defense);
