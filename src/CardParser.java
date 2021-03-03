@@ -88,11 +88,11 @@ import org.json.simple.JSONArray;
 			{
 				i = 2000;
 				Sorted.add(this.theMinions.get(size));
-				int attackf = this.theMinions.get(size+1).getAttack();
-				int attackb = this.theMinions.get(size-1).getAttack();
+				//int attackf = this.theMinions.get(size+1).getAttack();
+				//int attackb = this.theMinions.get(size-1).getAttack();
 				
 				// if there are more cards with the same attack forward
-				if (attack == attackf)
+				/*if (attack == attackf)
 				{	
 					
 					
@@ -125,7 +125,7 @@ import org.json.simple.JSONArray;
 							
 						}
 					}
-				}
+				}*/
 				
 				
 			
